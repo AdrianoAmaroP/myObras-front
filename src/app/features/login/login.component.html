@@ -1,6 +1,23 @@
-<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-  <input class="input" placeholder="Usuário" type="text" name="username" [(ngModel)]="user.username" required>
-  <input class="input" placeholder="Senha" type="password" name="password" [(ngModel)]="user.password" required>
+<div class="login-container">
+  <div class="card has-text-centered">
+    <div class="card-content">
+      <header class="card-header">
+        <p class="card-header-title is-uppercase is-centered">LOGIN</p>
+      </header>
 
-  <button class="button is-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
-</form>
+      <div class="content">
+        <div class="content">
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+
+            <input class="input" placeholder="Usuário" type="text" name="username" [(ngModel)]="user.username" required>
+            <input class="input mt-4" placeholder="Senha" type="password" name="password" [(ngModel)]="user.password"
+              required>
+
+            <button class="button is-primary mt-4" type="submit" [disabled]="!loginForm.valid">Login</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
