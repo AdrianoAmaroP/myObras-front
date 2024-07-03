@@ -1,0 +1,6 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+  <input class="input" placeholder="Usuário" type="text" name="username" [(ngModel)]="user.username" required>
+  <input class="input" placeholder="Senha" type="password" name="password" [(ngModel)]="user.password" required>
+
+  <button class="button is-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+</form>
