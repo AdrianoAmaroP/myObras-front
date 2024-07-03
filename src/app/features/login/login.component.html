@@ -14,7 +14,9 @@
             <input class="input mt-4" placeholder="Senha" type="password" name="password" [(ngModel)]="user.password"
               required minlength="4">
 
-            <button class="button is-primary mt-4" type="submit" [disabled]="!loginForm.valid">Login</button>
+            <button class="button is-primary mt-4"
+              [ngClass]="{'is-loading': isLoading }"
+            type="submit" [disabled]="!loginForm.valid">Login</button>
 
           </form>
         </div>
