@@ -9,9 +9,10 @@
         <div class="content">
           <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
 
-            <input class="input" placeholder="Usuário" type="text" name="username" [(ngModel)]="user.username" required>
+            <input class="input" placeholder="Usuário" type="text" name="username" [(ngModel)]="user.username" required
+              minlength="4">
             <input class="input mt-4" placeholder="Senha" type="password" name="password" [(ngModel)]="user.password"
-              required>
+              required minlength="4">
 
             <button class="button is-primary mt-4" type="submit" [disabled]="!loginForm.valid">Login</button>
 
