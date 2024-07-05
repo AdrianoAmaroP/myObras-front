@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,18 +15,25 @@ export class LoginComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
-
     console.log('Form submitted', form);
     console.log('User', this.user);
     this.isLoading = true;
 
-    // todo: fazer o subscribe e redirecionar para o dashboard
-    throw new Error('Method not implemented.');
+    this.auth.login(this.user.username, this.user.password).subscribe(
+      (response) => {
+        console.log('Response', response);
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error', error);
+        this.isLoading = false;
+      }
+    );
   }
 }
 
