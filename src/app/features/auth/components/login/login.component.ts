@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,25 +16,28 @@ export class LoginComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  constructor(private auth: AuthService) {}
+  // todo: trocar pra reactive forms vai ajudar a fazer validações
+  isLoginValid: boolean = true;
+
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
-    console.log('Form submitted', form);
-    console.log('User', this.user);
-    this.isLoading = true;
-
-    this.auth.login(this.user.username, this.user.password).subscribe(
-      (response) => {
-        console.log('Response', response);
+    // faz a req
+    this.auth.login(this.user.username, this.user.password).subscribe({
+      complete: () => {
         this.isLoading = false;
+        this.router.navigate(['/dashboard']);
       },
-      (error) => {
-        console.error('Error', error);
+      error: (err) => {
         this.isLoading = false;
-      }
-    );
+        console.error(err);
+
+        // mostra erro
+        this.isLoginValid = false;
+      },
+    });
   }
 }
 
